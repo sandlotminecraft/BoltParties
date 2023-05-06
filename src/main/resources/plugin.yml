@@ -1,0 +1,5 @@
+name: BoltFactions
+version: '${version}'
+main: org.popcraft.boltfactions.BoltFactions
+api-version: 1.19
+depend: [ Bolt, Factions ]
