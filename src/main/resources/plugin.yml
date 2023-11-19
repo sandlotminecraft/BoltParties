@@ -1,5 +1,5 @@
-name: BoltFactions
+name: BoltParties
 version: '${version}'
-main: org.popcraft.boltfactions.BoltFactions
+main: org.popcraft.boltparties.BoltParties
 api-version: 1.19
-depend: [ Bolt, Factions ]
+depend: [ Bolt, Parties ]

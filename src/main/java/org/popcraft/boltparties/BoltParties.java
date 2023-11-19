@@ -1,20 +1,19 @@
-package org.popcraft.boltfactions;
+package org.popcraft.boltparties;
 
-import com.massivecraft.factions.FPlayer;
-import com.massivecraft.factions.FPlayers;
-import com.massivecraft.factions.Faction;
-import com.massivecraft.factions.Factions;
-import com.massivecraft.factions.FactionsPlugin;
+import com.alessiodp.parties.api.Parties;
+import com.alessiodp.parties.api.interfaces.PartiesAPI;
+import com.alessiodp.parties.api.interfaces.Party;
 import org.bukkit.Bukkit;
+import org.bukkit.plugin.Plugin;
 import org.bukkit.entity.Player;
 import org.bukkit.event.Listener;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.popcraft.bolt.BoltAPI;
 import org.popcraft.bolt.source.SourceTypes;
 
-public final class BoltFactions extends JavaPlugin implements Listener {
+public final class BoltParties extends JavaPlugin implements Listener {
     private BoltAPI bolt;
-    private FactionsPlugin factions;
+    private PartiesAPI partiesApi;
 
     @Override
     public void onEnable() {
@@ -23,11 +22,14 @@ public final class BoltFactions extends JavaPlugin implements Listener {
             getServer().getPluginManager().disablePlugin(this);
             return;
         }
-        this.factions = (FactionsPlugin) getServer().getPluginManager().getPlugin("Factions");
-        if (factions == null) {
+        final Plugin partiesPlugin = getServer().getPluginManager().getPlugin("Parties");
+        if (partiesPlugin == null || !partiesPlugin.isEnabled()) {
             getServer().getPluginManager().disablePlugin(this);
             return;
         }
+        this.partiesApi = Parties.getApi();
+
+
         bolt.registerPlayerSourceResolver((source, uuid) -> {
             if (!SourceTypes.FACTION.equals(source.getType())) {
                 return false;
@@ -36,22 +38,26 @@ public final class BoltFactions extends JavaPlugin implements Listener {
             if (player == null) {
                 return false;
             }
-            final FPlayer fPlayer = FPlayers.getInstance().getByPlayer(player);
-            if (fPlayer == null) {
+            if (partiesApi.getPartyPlayer(player.getUniqueId()) == null) {
                 return false;
             }
-            final String factionName = source.getIdentifier();
-            final Faction faction = Factions.getInstance().getByTag(factionName);
-            if (faction == null) {
+            final String partyName = source.getIdentifier();
+            final Party party = partiesApi.getParty(partyName);
+            if (party == null) {
                 return false;
             }
-            return faction.getFPlayerAdmin().getName().equals(player.getName()) || faction.getFPlayers().contains(fPlayer);
+            if (!party.getMembers().isEmpty()) {
+                if (party.getMembers().contains(player.getUniqueId())) {
+                    return true;
+                }
+            }
+            return false;
         });
     }
 
     @Override
     public void onDisable() {
         this.bolt = null;
-        this.factions = null;
+        this.partiesApi = null;
     }
 }

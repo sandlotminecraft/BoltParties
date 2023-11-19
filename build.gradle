@@ -24,13 +24,17 @@ repositories {
         name = "ender-zone"
         url = "https://ci.ender.zone/plugin/repository/everything/"
     }
+    maven {
+        name = "alessiodp-repo"
+        url = "https://repo.alessiodp.com/releases/"
+    }
 }
 
 dependencies {
     compileOnly "org.spigotmc:spigot-api:1.19.4-R0.1-SNAPSHOT"
     compileOnly "org.popcraft:bolt-common:1.0.480"
     compileOnly "org.popcraft:bolt-bukkit:1.0.480"
-    compileOnly "com.massivecraft:Factions:1.6.9.5-U0.4.9" transitive false
+    compileOnly "com.alessiodp.parties:parties-api:3.2.14"
 }
 
 def targetJavaVersion = 17
@@ -60,7 +64,7 @@ processResources {
 
 modrinth {
     token.set(System.getenv("MODRINTH_TOKEN"))
-    projectId.set("boltfactions")
+    projectId.set("boltparties")
     versionName.set("${project.name} ${version}")
     versionNumber.set("${version}")
     versionType.set("release")

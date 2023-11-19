@@ -4,4 +4,4 @@ pluginManagement {
     }
 }
 
-rootProject.name = 'BoltFactions'
+rootProject.name = 'BoltParties'
