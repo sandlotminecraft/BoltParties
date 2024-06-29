@@ -31,7 +31,7 @@ public final class BoltParties extends JavaPlugin implements Listener {
 
 
         bolt.registerPlayerSourceResolver((source, uuid) -> {
-            if (!SourceTypes.FACTION.equals(source.getType())) {
+            if ("party" != source.getType()) {
                 return false;
             }
             final Player player = Bukkit.getPlayer(uuid);

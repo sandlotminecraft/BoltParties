@@ -1,0 +1,5 @@
+name: BoltParties
+version: '${version}'
+main: org.popcraft.boltparties.BoltParties
+api-version: 1.19
+depend: [ Bolt, Parties ]
