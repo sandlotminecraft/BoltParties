@@ -1,4 +1,7 @@
 {
   "java.configuration.updateBuildConfiguration": "interactive",
-  "java.compile.nullAnalysis.mode": "automatic"
+  "java.compile.nullAnalysis.mode": "automatic",
+  "yaml.schemas": {
+    "https://json.schemastore.org/bukkit-plugin.json": "file:///c%3A/Users/ericw/OneDrive/dev/org-sandlotminecraft/BoltParties/src/main/resources/plugin.yml"
+  }
 }

@@ -1,4 +1,4 @@
-package org.popcraft.boltparties;
+package com.sandlotminecraft.boltparties;
 
 import com.alessiodp.parties.api.Parties;
 import com.alessiodp.parties.api.interfaces.PartiesAPI;
