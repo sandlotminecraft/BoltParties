@@ -9,7 +9,6 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.Listener;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.popcraft.bolt.BoltAPI;
-import org.popcraft.bolt.source.SourceTypes;
 
 public final class BoltParties extends JavaPlugin implements Listener {
     private BoltAPI bolt;
