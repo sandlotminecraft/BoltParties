@@ -37,18 +37,13 @@ public final class BoltParties extends JavaPlugin implements Listener {
             if (player == null) {
                 return false;
             }
-            if (partiesApi.getPartyPlayer(player.getUniqueId()) == null) {
-                return false;
-            }
-            final String partyName = source.getIdentifier();
-            final Party party = partiesApi.getParty(partyName);
+            final Party party = partiesApi.getPartyOfPlayer(uuid);
             if (party == null) {
                 return false;
             }
-            if (!party.getMembers().isEmpty()) {
-                if (party.getMembers().contains(player.getUniqueId())) {
-                    return true;
-                }
+            final String partyName = source.getIdentifier();
+            if (party.getName().toLowerCase() == partyName.toLowerCase()) {
+                return true;
             }
             return false;
         });
