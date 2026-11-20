@@ -30,7 +30,7 @@ public final class BoltParties extends JavaPlugin implements Listener {
 
 
         bolt.registerPlayerSourceResolver((source, uuid) -> {
-            if ("party" != source.getType()) {
+            if (!"party".equals(source.getType())) {
                 return false;
             }
             final Player player = Bukkit.getPlayer(uuid);
@@ -42,7 +42,7 @@ public final class BoltParties extends JavaPlugin implements Listener {
                 return false;
             }
             final String partyName = source.getIdentifier();
-            if (party.getName().toLowerCase() == partyName.toLowerCase()) {
+            if (partyName != null && partyName.equalsIgnoreCase(party.getName())) {
                 return true;
             }
             return false;
